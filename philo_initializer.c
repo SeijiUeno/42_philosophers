@@ -6,7 +6,7 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:58:32 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/12 17:44:29 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:54:09 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ int init_table_safeguard(t_table *table)
 {
     int i;
     
-    if (phtread_mutex_init(&(table->writing), NULL))
+    if (pthread_mutex_init(&(table->writing), NULL))
         return (1);
-    if (phtread_mutex_init(&(table->meal_check, NULL)))
+    if (pthread_mutex_init(&(table->meal_check, NULL)))
         return (1);
     i = table->number_of_philosophers;
     while (--i >= 0)
     {
-        if (phtread_mutex_init(&(table->fork[i], NULL)))
+        if (pthread_mutex_init(&(table->forks[i], NULL)))
             return (1);
     }
 }

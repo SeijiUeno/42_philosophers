@@ -1,31 +1,43 @@
-# Set the compiler and compilation flags
+# Compiler and flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -lpthread
+CFLAGS = -Wall -Wextra -Werror
+LDFLAGS = -lpthread
 
-# Define the object files
-OBJS = basic_functions.o input_handler.o philo_initializer.o main.o
-
-# Define the executable name
+# Executable name
 EXECUTABLE = philosophers
 
+# Object directory
+OBJDIR = obj
+
+# Source files
+SRCS = basic_functions.c input_handler.c philo_initializer.c main.c
+
+# Object files (in OBJDIR)
+OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
+
 # Default target: build the executable
-all: $(EXECUTABLE)
+all: $(OBJDIR) $(EXECUTABLE)
+
+# Ensure the object directory exists
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
 
 # Rule to build the executable
 $(EXECUTABLE): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(EXECUTABLE)
+	$(CC) $(CFLAGS) $(OBJS) -o $(EXECUTABLE) $(LDFLAGS)
     
-# Rule to compile each source file into an object file
-%.o: %.c philosophers.h
+# Rule to compile each source file into an object file in $(OBJDIR)
+$(OBJDIR)/%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Clean target: remove only object files 
+# Clean target: remove only object files
 clean:
-	rm -f *.o 
+	rm -f $(OBJDIR)/*.o
 
-# Force clean target: remove object files and the executable
-fclean: 
-	rm -f *.o $(EXECUTABLE)
+# Force clean target: remove object files, the executable, and the obj directory
+fclean: clean
+	rm -f $(EXECUTABLE)
+	rm -rf $(OBJDIR)
 
 # Re target: clean and rebuild
 re: fclean all
