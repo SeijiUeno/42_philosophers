@@ -6,13 +6,13 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:58:32 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/12 17:54:09 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/12 18:13:17 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-int philos_setter(t_table *table)
+void philos_setter(t_table *table)
 {
     int guests;
     int i;
@@ -28,7 +28,6 @@ int philos_setter(t_table *table)
         table->philosopher[i].last_meal = 0;
         table->philosopher[i].table = table;
     }
-    return (0);
 }
 
 int init_table_safeguard(t_table *table)
@@ -45,4 +44,5 @@ int init_table_safeguard(t_table *table)
         if (pthread_mutex_init(&(table->forks[i], NULL)))
             return (1);
     }
+    return (0);
 }

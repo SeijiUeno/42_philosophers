@@ -40,7 +40,7 @@ typedef struct s_table
     int             time_to_sleep;
     int             eat_times; 
     int             dead_count;
-    int             finished_meals;
+    int             all_ate;
     unsigned long   start_meal_time;
     t_philo         philosopher[201];
     pthread_mutex_t forks[201];
@@ -53,5 +53,10 @@ int ft_atoi(char *str);
 int only_digits(char *str);
 int basic_check(int argc, char *input[]);
 void load_input(t_table *holder, char *input[]);
+
+// philo init
+
+void philos_setter(t_table *table);
+int init_table_safeguard(t_table *table);
 
 #endif
