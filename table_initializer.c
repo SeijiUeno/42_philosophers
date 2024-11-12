@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   table_initializer.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 14:37:29 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/12 17:26:11 by sueno-te         ###   ########.fr       */
+/*   Created: 2024/11/12 18:01:23 by sueno-te          #+#    #+#             */
+/*   Updated: 2024/11/12 18:14:18 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philosopher.h"
+#include "philosophers.h"
 
-static int loading(t_table *holder, int argc, char *argv[])
+static  int basic_rules_checker(t_table *table);
+
+int init_table(t_table *table)
 {
-    if (!basic_check(argc, argv))
-    {
-        fprintf(stderr, "%s : Basic_Check ERROR\n", argv[0]);
-        return (0);
-    }
-    load_input(holder, argv);
-    return(1);
+    if (!basic_rules_checker(table) || !init_table_safeguard(table))
+        return (1);
+    philos_setter(table);
 }
 
-int main(int argc, char *argv[])
+static  int basic_rules_checker(t_table *table)
 {
-    t_table  holder;
-
-    loading(&holder, argc, argv);
+    if (table->number_of_philosophers < 2 || table->time_eat < 0
+		|| table->time_to_sleep < 0 || table->number_of_philosophers > 200)
+		return (1)
     return (0);
 }
