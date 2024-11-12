@@ -1,9 +1,9 @@
 # Set the compiler and compilation flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -lpthread
 
 # Define the object files
-OBJS = basic_functions.o input_handler.o main.o
+OBJS = basic_functions.o input_handler.o philo_initializer.o main.o
 
 # Define the executable name
 EXECUTABLE = philosophers

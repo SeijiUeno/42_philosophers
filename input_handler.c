@@ -6,7 +6,7 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 16:34:45 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/11 17:03:17 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:26:22 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int basic_check(int argc, char *input[])
     return (1);
 }
 
-void load_input(t_init *holder, char *input[])
+void load_input(t_table *holder, char *input[])
 {
     holder->number_of_philosophers = ft_atoi(input[1]);
     holder->time_to_die = ft_atoi(input[2]);
