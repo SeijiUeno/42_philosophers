@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosopher.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/13 12:30:29 by sueno-te          #+#    #+#             */
+/*   Updated: 2024/11/13 12:30:30 by sueno-te         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILOSOPHER_H
 # define PHILOSOPHER_H
 
@@ -52,12 +64,14 @@ struct s_table
 int isspace(int c);
 int ft_atoi(char *str);
 int only_digits(char *str);
-int basic_check(int argc, char *input[]);
+
 void load_input(t_table *holder, char *input[]);
+int validate_input(int argc, char *input[]);
 
 // philo init
 
-void philos_setter(t_table *table);
-int init_table_safeguard(t_table *table);
+int init_table(t_table *table);
+
+void *philosopher_routine(void *arg);
 
 #endif
