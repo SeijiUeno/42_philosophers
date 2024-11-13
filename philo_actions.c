@@ -6,18 +6,18 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:54:59 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/13 19:35:31 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:45:18 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-static void take_forks(t_philo *philo) {
+void take_forks(t_philo *philo) {
     t_table *table = philo->table;
 
-    pthread_mutex_lock(&(table->forks[philo->right_fork]));
-    action_print(table, philo->id, "has taken a fork");
     pthread_mutex_lock(&(table->forks[philo->left_fork]));
+    action_print(table, philo->id, "has taken a fork");
+    pthread_mutex_lock(&(table->forks[philo->right_fork]));
     action_print(table, philo->id, "has taken a fork");
 }
 

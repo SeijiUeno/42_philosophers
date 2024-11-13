@@ -6,7 +6,7 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 11:59:10 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/13 19:14:20 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:46:06 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@ void *philosopher_routine(void *void_philosopher)
 {
     t_philo *philo = (t_philo *)void_philosopher;
     t_table *table = philo->table;
-
-    // Stagger start times to prevent contention
-
     
     while (!(table->dead_count) && !(table->all_ate))
     {
@@ -48,15 +45,11 @@ void cleanup_and_exit(t_table *table, t_philo *philos)
 {
     int i = 0;
 
-    // Wait for all threads to finish
     while (i < table->number_of_philosophers) {
         pthread_join(philos[i].thread_id, NULL);
         i++;
     }
-
-    i = 0; // Reset the counter
-
-    // Destroy mutexes
+    i = 0;
     while (i < table->number_of_philosophers) {
         pthread_mutex_destroy(&(table->forks[i]));
         i++;

@@ -6,7 +6,7 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:00:42 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/13 19:01:41 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:43:42 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 int check_philosopher_death(t_table *table, t_philo *philos) {
     int i = 0;
+    long long safe;
+    
     while (i < table->number_of_philosophers) {
         pthread_mutex_lock(&(table->meal_check));
-        if (timestamp() - philos[i].last_meal > table->time_to_die) {
+        safe = timestamp() - philos[i].last_meal;
+        if (safe > table->time_to_die) {
             action_print(table, philos[i].id, "died");
             table->dead_count = 1;
             pthread_mutex_unlock(&(table->meal_check));
