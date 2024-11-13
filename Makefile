@@ -10,7 +10,7 @@ EXECUTABLE = philosophers
 OBJDIR = obj
 
 # Source files
-SRCS = basic_functions.c input_handler.c philo_initializer.c main.c
+SRCS = basic_functions.c input_utils.c init.c table_init.c main.c
 
 # Object files (in OBJDIR)
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)

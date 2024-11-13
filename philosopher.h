@@ -20,8 +20,9 @@
 */
 
 typedef struct s_table t_table; // Forward declaration
+typedef struct s_philo t_philo;
 
-typedef struct s_philo
+struct s_philo
 {
     int             id;
     int             eat_count;
@@ -30,9 +31,9 @@ typedef struct s_philo
     int             right_fork;
     pthread_t       thread_id;
     t_table         *table; 
-}               t_philo;
+};
 
-typedef struct s_table
+struct s_table
 {
     int             number_of_philosophers;
     int             time_to_die;
@@ -46,7 +47,7 @@ typedef struct s_table
     pthread_mutex_t forks[201];
     pthread_mutex_t meal_check;
     pthread_mutex_t writing; 
-}               t_table;
+};
 
 int isspace(int c);
 int ft_atoi(char *str);
