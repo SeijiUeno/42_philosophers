@@ -6,7 +6,7 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:00:19 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/13 14:15:03 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/13 17:52:07 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ void smart_sleep(int duration, t_table *table)
     {
         if (time_diff(start_time, timestamp()) >= duration)
             break;
-        usleep(100);
+        usleep(42);
     }
 }

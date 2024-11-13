@@ -6,7 +6,7 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:30:29 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/13 15:26:14 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:04:08 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,13 @@ void    action_print(t_table *rules, int id, char *string);
 int dinner_time(t_table *table);
 
 void cleanup_and_exit(t_table *table, t_philo *philos);
+
 void monitor_philosophers(t_table *table, t_philo *philos);
 int check_all_ate(t_table *table, t_philo *philos);
 int check_philosopher_death(t_table *table, t_philo *philos);
+
 void *philosopher_routine(void *void_philosopher);
-void philo_thinks(t_philo *philo);
+
 void philo_sleeps(t_philo *philo);
 void philo_eats(t_philo *philo);
 
