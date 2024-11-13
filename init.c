@@ -6,13 +6,13 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:58:32 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/13 10:50:38 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/13 12:09:52 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void philos_setter(t_table *table)
+static void philos_setter(t_table *table)
 {
     int guests;
     int i;
@@ -30,24 +30,24 @@ void philos_setter(t_table *table)
     }
 }
 
-int init_table_safeguard(t_table *table)
+static int init_table_safeguard(t_table *table)
 {
     int i;
-    
-    if (pthread_mutex_init(&(table->writing), NULL))
+
+    if (pthread_mutex_init(&table->writing, NULL) != 0)
         return (1);
-    if (pthread_mutex_init(&(table->meal_check, NULL)))
+    if (pthread_mutex_init(&table->meal_check, NULL) != 0)
         return (1);
     i = table->number_of_philosophers;
     while (--i >= 0)
     {
-        if (pthread_mutex_init(&(table->forks[i], NULL)))
+        if (pthread_mutex_init(&table->forks[i], NULL) != 0)
             return (1);
     }
     return (0);
 }
 
-int basic_rules_checker(t_table *table) {
+static int basic_rules_checker(t_table *table) {
     if (table->number_of_philosophers < 2) {
         fprintf(stderr, "Error: Need at least 2 philosophers.\n");
         return (1);

@@ -52,12 +52,14 @@ struct s_table
 int isspace(int c);
 int ft_atoi(char *str);
 int only_digits(char *str);
-int basic_check(int argc, char *input[]);
+
 void load_input(t_table *holder, char *input[]);
+int validate_input(int argc, char *input[]);
 
 // philo init
 
-void philos_setter(t_table *table);
-int init_table_safeguard(t_table *table);
+int init_table(t_table *table);
+
+void *philosopher_routine(void *arg);
 
 #endif
