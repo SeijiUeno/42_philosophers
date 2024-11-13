@@ -6,27 +6,30 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 14:37:29 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/12 16:10:48 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/13 10:55:41 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "philosopher.h"
 
-static int loading(t_init *holder, int argc, char *argv[])
-{
-    if (!basic_check(argc, argv))
-    {
-        fprintf(stderr, "%s : Basic_Check ERROR\n", argv[0]);
-        return (0);
+static int loading(t_table *holder, int argc, char *argv[]) {
+    if (validate_input(argc, argv)) {
+        fprintf(stderr, "%s : Input ERROR\n", argv[0]);
+        return (1);
     }
     load_input(holder, argv);
-    return(1);
+    if (init_table(holder)) {
+        fprintf(stderr, "%s : Initialization ERROR\n", argv[0]);
+        return (1);
+    }
+    return (0); 
 }
 
-int main(int argc, char *argv[])
-{
-    t_init  holder;
+int main(int argc, char *argv[]) {
+    t_table holder;
 
-    loading(&holder, argc, argv);
+    if (loading(&holder, argc, argv)) {
+        return (1);
+    }
     return (0);
 }
