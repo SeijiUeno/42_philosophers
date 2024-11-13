@@ -6,27 +6,30 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:58:32 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/13 15:01:43 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:34:47 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-static void philos_setter(t_table *table)
-{
-    int guests;
+void philos_setter(t_table *table) {
     int i;
-    
-    guests = table->number_of_philosophers;
-    i = guests;
-    while (--i >= 0)
-    {
-        table->philosopher[i].id = i;
-        table->philosopher[i].eat_count = 0;
-        table->philosopher[i].left_fork = i;
-        table->philosopher[i].right_fork = (i+1) % guests;
-        table->philosopher[i].last_meal = 0;
-        table->philosopher[i].table = table;
+    int guests = table->number_of_philosophers;
+
+    for (i = 0; i < guests; i++) {
+        t_philo *philo = &table->philosopher[i];
+        philo->id = i;
+        philo->eat_count = 0;
+        philo->last_meal = 0;
+        philo->table = table;
+
+        if (i % 2 == 0) {
+            philo->left_fork = i;
+            philo->right_fork = (i + 1) % guests;
+        } else {
+            philo->left_fork = (i + 1) % guests;
+            philo->right_fork = i;
+        }
     }
 }
 

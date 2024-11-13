@@ -6,7 +6,7 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 11:59:10 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/13 19:06:20 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:14:20 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ void *philosopher_routine(void *void_philosopher)
     t_table *table = philo->table;
 
     // Stagger start times to prevent contention
-       if (philo->id % 2)
-        usleep(5555);
+
     
     while (!(table->dead_count) && !(table->all_ate))
     {
