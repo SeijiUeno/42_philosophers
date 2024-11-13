@@ -6,7 +6,7 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:30:29 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/13 12:30:30 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/13 13:22:02 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,20 @@ int only_digits(char *str);
 void load_input(t_table *holder, char *input[]);
 int validate_input(int argc, char *input[]);
 
-// philo init
-
 int init_table(t_table *table);
 
 void *philosopher_routine(void *arg);
+
+long long	time_diff(long long past, long long pres);
+long long	timestamp(void);
+void    action_print(t_table *rules, int id, char *string);
+
+int		dinner_time(t_table *rules);
+
+void philo_eats(t_philo *philo);
+void *p_thread(void *void_philosopher);
+void exit_launcher(t_table *rules, t_philo *philos);
+void death_checker(t_table *r, t_philo *p);
+void smart_sleep(int duration, t_table *table);
 
 #endif
