@@ -6,7 +6,7 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 11:59:10 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/13 20:33:14 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:52:42 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ void	*philosopher_routine(void *void_philosopher)
 			break ;
 		}
 		pthread_mutex_unlock(&(table->meal_check));
-		philo_eats(philo);
+        if (table->number_of_philosophers == 1)
+            eat_action_solo(table, philo);
+        else
+		    philo_eats(philo);
 		if (table->all_ate || table->dead_count)
 			break ;
 		philo_sleeps(philo);
@@ -57,6 +60,12 @@ void	cleanup_and_exit(t_table *table, t_philo *philos)
 	}
 	pthread_mutex_destroy(&(table->meal_check));
 	pthread_mutex_destroy(&(table->writing));
+}
+
+void	philo_sleeps(t_philo *philo)
+{
+	action_print(philo->table, philo->id, "is sleeping");
+	smart_sleep(philo->table->time_to_sleep, philo->table);
 }
 
 int	dinner_time(t_table *table)

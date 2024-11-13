@@ -6,13 +6,13 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 16:35:54 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/13 20:28:03 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:46:05 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-int	isspace(int c)
+int	ft_isspace(int c)
 {
 	return (c == ' ' || c == '\t' || c == '\n'
 		|| c == '\r' || c == '\v' || c == '\f');
@@ -25,7 +25,7 @@ int	ft_atoi(char *str)
 
 	number = 0;
 	i = 0;
-	while (isspace(str[i]))
+	while (ft_isspace(str[i]))
 		i++;
 	while (str[i] && (str[i] >= '0' && str[i] <= '9'))
 	{
@@ -44,7 +44,7 @@ int	only_digits(char *str)
 	i = 0;
 	if (str[0] == '\0')
 		return (-1);
-	while (isspace(str[i]))
+	while (ft_isspace(str[i]))
 		i++;
 	while (str[i])
 	{
