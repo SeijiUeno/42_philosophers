@@ -6,7 +6,7 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:30:29 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/13 13:22:02 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/13 14:16:55 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 # define PHILOSOPHER_H
 
 # include <unistd.h>
-# include <stdio.h> // fprintf function (forbidden to be removed WIP!)
-# include <stdlib.h>
+# include <string.h>
+# include <stdio.h>
 # include <pthread.h>
 # include <sys/time.h>
 
 # define INT_MAX 2147483647
+# define USE_ERROR "./philo <number_of_philosophers> <time_to_die> <time_to_eat> <time_to_sleep> <number_of_times_each_philosopher_must_eat>\n"
 
 /*
     Logs 
@@ -64,6 +65,7 @@ struct s_table
 int isspace(int c);
 int ft_atoi(char *str);
 int only_digits(char *str);
+void ft_putstr_fd(char *s, int fd);
 
 void load_input(t_table *holder, char *input[]);
 int validate_input(int argc, char *input[]);

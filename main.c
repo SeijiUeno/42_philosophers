@@ -6,7 +6,7 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 14:37:29 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/13 13:40:42 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/13 14:02:27 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static int loading(t_table *table, int argc, char *argv[]) {
     }
     load_input(table, argv);
     if (init_table(table)) {
-        fprintf(stderr, "%s : Initialization ERROR\n", argv[0]);
         return (1);
     }
     return (0); 

@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -Werror
 LDFLAGS = -lpthread
 
 # Executable name
-EXECUTABLE = philosophers
+EXECUTABLE = philo
 
 # Object directory
 OBJDIR = obj

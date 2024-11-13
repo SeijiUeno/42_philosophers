@@ -6,7 +6,7 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 16:35:54 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/13 12:35:30 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/13 14:09:01 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,18 @@ int only_digits(char *str) {
         i++;
     }
     return (0);
+}
+
+static size_t ft_strlen(const char *str) {
+  size_t len = 0;
+  while (str[len] != '\0') {
+    len++;
+  }
+  return len;
+}
+
+void ft_putstr_fd(char *s, int fd)
+{
+  if (s)
+    write(fd, s, ft_strlen(s));
 }

@@ -6,7 +6,7 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:00:19 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/13 13:21:27 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/13 14:15:03 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,16 @@ long long time_diff(long long past, long long pres)
     return (pres - past);
 }
 
-void action_print(t_table *rules, int id, char *string)
+void action_print(t_table *rules, int id, char *action)
 {
+    long long current_time;
+
     pthread_mutex_lock(&(rules->writing));
+
+    current_time = timestamp() - rules->start_meal_time; 
     if (!(rules->dead_count))
-        printf("%lli %d %s\n", timestamp(), id + 1, string);
+        printf("%lld %d %s\n", current_time, id + 1, action);
+
     pthread_mutex_unlock(&(rules->writing));
 }
 
