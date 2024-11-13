@@ -6,7 +6,7 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:58:32 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/13 14:12:21 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/13 15:01:43 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,6 @@ static int init_table_safeguard(t_table *table)
 }
 
 static int basic_rules_checker(t_table *table) {
-    if (table->number_of_philosophers < 2) {
-        ft_putstr_fd("Error: Need at least 2 philosophers.\n", 2);
-        return (1);
-    }
     if (table->number_of_philosophers > 200) {
         ft_putstr_fd("Error: Maximum 200 philosophers allowed.\n", 2);
         return (1);
