@@ -6,80 +6,80 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 11:59:10 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/13 19:46:06 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/13 21:05:47 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void *philosopher_routine(void *void_philosopher)
+void	*philosopher_routine(void *void_philosopher)
 {
-    t_philo *philo = (t_philo *)void_philosopher;
-    t_table *table = philo->table;
-    
-    while (!(table->dead_count) && !(table->all_ate))
-    {
-        pthread_mutex_lock(&(table->meal_check));
-        if (table->eat_times != -1 && philo->eat_count >= table->eat_times)
-        {
-            pthread_mutex_unlock(&(table->meal_check));
-            break;
-        }
-        pthread_mutex_unlock(&(table->meal_check));
+	t_philo	*philo;
+	t_table	*table;
 
-        philo_eats(philo);
-
-        if (table->all_ate || table->dead_count)
-            break;
-
-        philo_sleeps(philo);
-
-        if (table->all_ate || table->dead_count)
-            break;
-        action_print(table, philo->id, "is thinking");
-    }
-    return (NULL);
+	philo = (t_philo *)void_philosopher;
+	table = philo->table;
+	while (!check_stop_condition(table))
+	{
+		if (check_eat_times(table, philo))
+			break ;
+		if (table->number_of_philosophers == 1)
+			eat_action_solo(table, philo);
+		else
+			philo_eats(philo);
+		if (check_stop_condition(table))
+			break ;
+		philo_sleeps(philo);
+		if (check_stop_condition(table))
+			break ;
+		action_print(philo->table, philo->id, "is thinking");
+	}
+	return (NULL);
 }
 
-void cleanup_and_exit(t_table *table, t_philo *philos)
+void	cleanup_and_exit(t_table *table, t_philo *philos)
 {
-    int i = 0;
+	int	i;
 
-    while (i < table->number_of_philosophers) {
-        pthread_join(philos[i].thread_id, NULL);
-        i++;
-    }
-    i = 0;
-    while (i < table->number_of_philosophers) {
-        pthread_mutex_destroy(&(table->forks[i]));
-        i++;
-    }
-
-    pthread_mutex_destroy(&(table->meal_check));
-    pthread_mutex_destroy(&(table->writing));
+	i = 0;
+	while (i < table->number_of_philosophers)
+	{
+		pthread_join(philos[i].thread_id, NULL);
+		i++;
+	}
+	i = 0;
+	while (i < table->number_of_philosophers)
+	{
+		pthread_mutex_destroy(&(table->forks[i]));
+		i++;
+	}
+	pthread_mutex_destroy(&(table->meal_check));
+	pthread_mutex_destroy(&(table->writing));
 }
 
-
-int dinner_time(t_table *table)
+void	philo_sleeps(t_philo *philo)
 {
-    int i = 0;
-    t_philo *philos = table->philosopher;
+	action_print(philo->table, philo->id, "is sleeping");
+	smart_sleep(philo->table->time_to_sleep, philo->table);
+}
 
-    table->start_meal_time = timestamp();
+int	dinner_time(t_table *table)
+{
+	int		i;
+	t_philo	*philos;
 
-    // Create philosopher threads
-    while (i < table->number_of_philosophers)
-    {
-        philos[i].last_meal = table->start_meal_time;
-        if (pthread_create(&(philos[i].thread_id), NULL, philosopher_routine, &(philos[i])))
-            return (1);
-        i++; // Increment the counter
-    }
-
-    // Monitor the philosophers
-    monitor_philosophers(table, philos);
-
-    // Cleanup and exit
-    cleanup_and_exit(table, philos);
-    return (0);
+	i = 0;
+	philos = table->philosopher;
+	table->start_meal_time = timestamp();
+	while (i < table->number_of_philosophers)
+	{
+		philos[i].last_meal = table->start_meal_time;
+		if (pthread_create(&(philos[i].thread_id), NULL, philosopher_routine,
+				&(philos[i])))
+			return (1);
+		i++;
+	}
+	monitor_philosophers(table, philos);
+	cleanup_and_exit(table, philos);
+	return (0);
 }
