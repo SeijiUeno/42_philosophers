@@ -6,7 +6,7 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:54:59 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/13 20:50:55 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:55:07 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,15 @@ static void	eat_action(t_philo *philo)
 	smart_sleep(table->time_to_eat, table);
 }
 
-void eat_action_solo(t_table *table, t_philo *philo)
-{   
-    pthread_mutex_lock(&(table->forks[philo->left_fork]));
-    action_print(table, philo->id, "has taken a fork");
-    smart_sleep(table->time_to_die, table);
-    action_print(table, philo->id, "died");
-    pthread_mutex_unlock(&(table->forks[philo->left_fork]));
-    table->dead_count = 1;
-    return ;
+void	eat_action_solo(t_table *table, t_philo *philo)
+{
+	pthread_mutex_lock(&(table->forks[philo->left_fork]));
+	action_print(table, philo->id, "has taken a fork");
+	smart_sleep(table->time_to_die, table);
+	action_print(table, philo->id, "died");
+	pthread_mutex_unlock(&(table->forks[philo->left_fork]));
+	table->dead_count = 1;
+	return ;
 }
 
 void	philo_eats(t_philo *philo)

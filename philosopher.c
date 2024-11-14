@@ -6,7 +6,7 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 11:59:10 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/13 20:52:42 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/13 21:05:47 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,20 @@ void	*philosopher_routine(void *void_philosopher)
 
 	philo = (t_philo *)void_philosopher;
 	table = philo->table;
-	while (!(table->dead_count) && !(table->all_ate))
+	while (!check_stop_condition(table))
 	{
-		pthread_mutex_lock(&(table->meal_check));
-		if (table->eat_times != -1 && philo->eat_count >= table->eat_times)
-		{
-			pthread_mutex_unlock(&(table->meal_check));
+		if (check_eat_times(table, philo))
 			break ;
-		}
-		pthread_mutex_unlock(&(table->meal_check));
-        if (table->number_of_philosophers == 1)
-            eat_action_solo(table, philo);
-        else
-		    philo_eats(philo);
-		if (table->all_ate || table->dead_count)
+		if (table->number_of_philosophers == 1)
+			eat_action_solo(table, philo);
+		else
+			philo_eats(philo);
+		if (check_stop_condition(table))
 			break ;
 		philo_sleeps(philo);
-		if (table->all_ate || table->dead_count)
+		if (check_stop_condition(table))
 			break ;
-		action_print(table, philo->id, "is thinking");
+		action_print(philo->table, philo->id, "is thinking");
 	}
 	return (NULL);
 }
@@ -70,8 +65,8 @@ void	philo_sleeps(t_philo *philo)
 
 int	dinner_time(t_table *table)
 {
-	int			i;
-	t_philo		*philos;
+	int		i;
+	t_philo	*philos;
 
 	i = 0;
 	philos = table->philosopher;

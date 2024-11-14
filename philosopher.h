@@ -6,7 +6,7 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:30:29 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/13 20:51:17 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/13 21:08:38 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void					*philosopher_routine(void *void_philosopher);
 void					philo_sleeps(t_philo *philo);
 void					philo_eats(t_philo *philo);
 void					smart_sleep(int duration, t_table *table);
-void                    eat_action_solo(t_table *table, t_philo *philo);
+void					eat_action_solo(t_table *table, t_philo *philo);
+int						check_eat_times(t_table *table, t_philo *philo);
+int						check_stop_condition(t_table *table);
 
 #endif
