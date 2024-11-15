@@ -23,7 +23,7 @@ It includes functions like pthread_create(), pthread_join(), pthread_mutex_init(
 This tells the linker to include the pthread library, which contains the actual implementations of the thread functions.
 
 compile without Makefile:
-- gcc -Wall -Wextra -Werror -lpthread my_program.c -o my_program
+- gcc -Wall -Wextra -Werror -lpthread *.c -o my_program
 
 compile with Makefile:
 - Make 
