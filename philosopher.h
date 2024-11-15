@@ -6,7 +6,7 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:30:29 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/13 21:08:38 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:50:20 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,28 +51,39 @@ struct					s_table
 	pthread_mutex_t		writing;
 };
 
+// basic
 int						isspace(int c);
 int						ft_atoi(char *str);
 int						only_digits(char *str);
 void					ft_putstr_fd(char *s, int fd);
+
+// load 
 void					load_input(t_table *holder, char *input[]);
-int						validate_input(int argc, char *input[]);
 int						init_table(t_table *table);
+
+// validate
+int						validate_input(int argc, char *input[]);
+
+// routine
 void					*philosopher_routine(void *arg);
+void					philo_sleeps(t_philo *philo);
+void					philo_eats(t_philo *philo);
+void					eat_action_solo(t_philo *philo);
+int						dinner_time(t_table *table);
+
+// time
 long long				time_diff(long long past, long long pres);
 long long				timestamp(void);
+
+// monitoring
+int						check_eat_times(t_table *table, t_philo *philo);
+int						check_stop_condition(t_table *table);
 void					action_print(t_table *rules, int id, char *string);
-int						dinner_time(t_table *table);
 void					cleanup_and_exit(t_table *table, t_philo *philos);
 void					monitor_philosophers(t_table *table, t_philo *philos);
 int						check_all_ate(t_table *table, t_philo *philos);
 int						check_death(t_table *table, t_philo *philos);
 void					*philosopher_routine(void *void_philosopher);
-void					philo_sleeps(t_philo *philo);
-void					philo_eats(t_philo *philo);
 void					smart_sleep(int duration, t_table *table);
-void					eat_action_solo(t_table *table, t_philo *philo);
-int						check_eat_times(t_table *table, t_philo *philo);
-int						check_stop_condition(t_table *table);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 11:59:10 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/13 21:05:47 by sueno-te         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:45:59 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	*philosopher_routine(void *void_philosopher)
 		if (check_eat_times(table, philo))
 			break ;
 		if (table->number_of_philosophers == 1)
-			eat_action_solo(table, philo);
+			eat_action_solo(philo);
 		else
 			philo_eats(philo);
 		if (check_stop_condition(table))
