@@ -6,7 +6,7 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:00:42 by sueno-te          #+#    #+#             */
-/*   Updated: 2025/02/22 13:44:11 by sueno-te         ###   ########.fr       */
+/*   Updated: 2025/02/22 14:22:20 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ int	check_all_ate(t_table *table, t_philo *philos)
 {
 	int	i;
 
-	i = 0;
 	if (table->eat_times == -1)
 		return (0);
+	i = 0;
 	while (i < table->number_of_philosophers)
 	{
 		pthread_mutex_lock(&(table->meal_check));
@@ -76,7 +76,9 @@ int	check_all_ate(t_table *table, t_philo *philos)
 		pthread_mutex_unlock(&(table->meal_check));
 		i++;
 	}
+	pthread_mutex_lock(&(table->meal_check));
 	table->all_ate = 1;
+	pthread_mutex_unlock(&(table->meal_check));
 	return (1);
 }
 
