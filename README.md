@@ -23,7 +23,11 @@ It includes functions like pthread_create(), pthread_join(), pthread_mutex_init(
 This tells the linker to include the pthread library, which contains the actual implementations of the thread functions.
 
 compile without Makefile:
-- gcc -Wall -Wextra -Werror -lpthread *.c -o my_program
+- gcc -Wall -Wextra -Werror -lpthread *.c -o philo
+
+You can use Valgrind’s Helgrind tool to check for threading issues:
+- valgrind --tool=helgrind --log-file=helgrind.log ./philo
 
 compile with Makefile:
 - Make 
+- ./philo 
