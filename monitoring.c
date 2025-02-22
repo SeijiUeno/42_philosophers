@@ -6,7 +6,7 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:00:42 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/14 16:42:34 by sueno-te         ###   ########.fr       */
+/*   Updated: 2025/02/22 13:44:11 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,11 @@ int	check_stop_condition(t_table *table)
 	int	stop;
 
 	pthread_mutex_lock(&(table->meal_check));
-	stop = table->all_ate;
+	stop = table->all_ate || table->dead_count;
 	pthread_mutex_unlock(&(table->meal_check));
-	return ((stop || table->dead_count));
+	return (stop);
 }
+
 
 int	check_death(t_table *table, t_philo *philos)
 {

@@ -6,7 +6,7 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:54:59 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/15 16:48:22 by sueno-te         ###   ########.fr       */
+/*   Updated: 2025/02/22 13:47:15 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ void	eat_action_solo(t_philo *philo)
 	smart_sleep(philo->table->time_to_die, philo->table);
 	action_print(philo->table, philo->id, "died");
 	pthread_mutex_unlock(&(philo->table->forks[philo->left_fork]));
+	
+	pthread_mutex_lock(&(philo->table->meal_check));
 	philo->table->dead_count = 1;
+	pthread_mutex_unlock(&(philo->table->meal_check));
 	return ;
 }
 

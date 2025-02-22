@@ -6,9 +6,10 @@
 /*   By: sueno-te <sueno-te@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:00:19 by sueno-te          #+#    #+#             */
-/*   Updated: 2024/11/13 20:08:09 by sueno-te         ###   ########.fr       */
+/*   Updated: 2025/02/22 13:46:52 by sueno-te         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "philosopher.h"
 
 long long	timestamp(void)
@@ -30,18 +31,24 @@ void	action_print(t_table *rules, int id, char *action)
 
 	pthread_mutex_lock(&(rules->writing));
 	current_time = timestamp() - rules->start_meal_time;
-	if (!(rules->dead_count))
-		printf("%lld %d %s\n", current_time, id + 1, action);
+	
+	printf("%lld %d %s\n", current_time, id + 1, action);
 	pthread_mutex_unlock(&(rules->writing));
 }
+
 
 void	smart_sleep(int duration, t_table *table)
 {
 	long long	start_time;
 
 	start_time = timestamp();
-	while (!(table->dead_count))
+	while (1)
 	{
+		pthread_mutex_lock(&(table->meal_check));
+		int dead = table->dead_count;
+		pthread_mutex_unlock(&(table->meal_check));
+		if (dead)
+			break ;
 		if (time_diff(start_time, timestamp()) >= duration)
 			break ;
 		usleep(42);
